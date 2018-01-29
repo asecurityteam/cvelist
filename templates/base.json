@@ -3,7 +3,7 @@
       "ASSIGNER" : "security@atlassian.com",
       "DATE_PUBLIC" : "20XX-XX-XXT00:00:00",
       "ID" : "CVE-20XX-XXXX",
-      "STATE" : "PUBLIC"
+      "STATE" : "IN_PROGRESS"
    },
    "affects" : {
       "vendor" : {
