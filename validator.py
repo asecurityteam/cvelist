@@ -28,7 +28,7 @@ def main():
             schema = 'CVE_JSON_4.0_min_public.schema'
             full_path = os.path.join(root, file_)
             file_json = None
-            if not file_.endswith('.json'):
+            if not file_.endswith('.json') or 'templates' in full_path:
                 continue
             with open(full_path, 'r') as f:
                 file_json = json.load(f)
