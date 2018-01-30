@@ -8,12 +8,46 @@ from . import utils
 
 def setup_opts():
     parser = argparse.ArgumentParser(
-        description='Update the internal cvelist from '
-        'the public cvelist.')
+        description='A script that can be used to synchronize an internal '
+        'cvelist and the public cvelist.')
     parser.add_argument('-p', '--path-to-cvelist-repository',
                         dest='public_cvelist_path', required=True,
                         help='Path to the public cvelist repository.')
+    parser.add_argument(
+        '-d', '--direction', dest='direction',
+        choices=['to_public', 'from_public'],
+        help=('Specify to_public to update the public cvelist '
+              'from the internal cvelist. '
+              'Specify from_public to update the internal cvelist '
+              'from the public cvelist.'),
+        required=True,
+    )
     return parser
+
+
+def sync_cve_files(files, copying_to, direction):
+    for a_file in files:
+        a_dir = os.path.dirname(a_file).split('cvelist')[-1].lstrip(os.sep)
+        dest = os.path.join(copying_to, a_dir)
+        base_name = os.path.basename(a_file)
+        existing_json_data = utils.get_info_from_cve_json_file(a_file)
+        state = utils.get_state_from_cve_json(existing_json_data)
+        if direction == 'from_public' and state == 'RESERVED':
+            possible_existing_location = os.path.join(dest, base_name)
+            if os.path.exists(possible_existing_location):
+                print('Not copying %s as it already exists at %s' % (
+                    a_file, possible_existing_location))
+                continue
+            dest = os.path.join(dest, 'reserved')
+        if direction == 'to_public':
+            if state in {'IN_PROGRESS', 'RESERVED'}:
+                print('Not copying %s as it is %s' % (a_file, state))
+                continue
+        if state not in {'RESERVED', 'PUBLIC'}:
+            raise ValueError('%s is not a valid state - %s' % (state, a_file))
+        os.makedirs(dest, exist_ok=True)
+        dest_file = os.path.join(dest, base_name)
+        shutil.copy(a_file, dest_file)
 
 
 def main():
@@ -22,26 +56,15 @@ def main():
     files_to_match = []
     for cve_id in utils.get_our_cna_cve_ids():
         files_to_match.append('%s.json' % cve_id)
-    files = set(utils.get_file_listing_for_path(args.public_cvelist_path,
+    if args.direction == 'to_public':
+        copying_to = args.public_cvelist_path
+        copying_from = internal_cvelist
+    if args.direction == 'from_public':
+        copying_to = internal_cvelist
+        copying_from = args.public_cvelist_path
+    files = set(utils.get_file_listing_for_path(copying_from,
                                                 files_to_match))
-    for a_file in files:
-        a_dir = os.path.dirname(a_file).split('cvelist')[-1].lstrip(os.sep)
-        dest = os.path.join(internal_cvelist, a_dir)
-        base_name = os.path.basename(a_file)
-        existing_json_data = utils.get_info_from_cve_json_file(a_file)
-        state = utils.get_state_from_cve_json(existing_json_data)
-        if state == 'RESERVED':
-            possible_existing_location = os.path.join(dest, base_name)
-            if os.path.exists(possible_existing_location):
-                print('Not copying %s as it already exists at %s' % (
-                      a_file, possible_existing_location))
-                continue
-            dest = os.path.join(dest, 'reserved')
-        if state not in {'RESERVED', 'PUBLIC'}:
-            raise ValueError('%s is not a valid state - %s' % (state, a_file))
-        os.makedirs(dest, exist_ok=True)
-        dest_file = os.path.join(dest, base_name)
-        shutil.copy(a_file, dest_file)
+    sync_cve_files(files, copying_to, args.direction)
 
 
 if __name__ == '__main__':
