@@ -28,7 +28,7 @@ def get_used_cve_id_from_git_branches():
 
 def get_free_cve_ids(used_cve_ids, files):
     """ yields free (reserved) cve ids and matching cve id file path. """
-    for a_file in files:
+    for a_file in sorted(files):
         existing_json_data = utils.get_info_from_cve_json_file(a_file)
         state = utils.get_state_from_cve_json(existing_json_data)
         if state != 'RESERVED':
