@@ -9,7 +9,7 @@ def get_file_listing_for_path(path, fnmatches):
         path.
     """
     for root, dirs, files in os.walk(path):
-        for file_ in files:
+        for file_ in sorted(files):
             for fnm in fnmatches:
                 if fnmatch.fnmatch(file_, fnm):
                     yield os.path.join(root, file_)
