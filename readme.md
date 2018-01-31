@@ -25,7 +25,8 @@ Install the needed dependencies by running
  1. providing the name of the product as the value for `product_name`, for example `Bamboo`.
  2. providing affected version information in `version_data` `version_value`(s).
  3. providing at least one url in reference_data section containing the issue(s) you want to detail.
- 4. provide a description under `description_data` that conforms with the [CNA rules](https://cve.mitre.org/cve/cna/CNA_Rules_v2.0.pdf) (see appendix B).
+ 4. provide information on the problem type under `problemtype`, for example `Cross Site Scripting (XSS)`.
+ 5. provide a description under `description_data` that conforms with the [CNA rules](https://cve.mitre.org/cve/cna/CNA_Rules_v2.0.pdf) (see appendix B).
 4. run `python validator.py`
 5. raise a pull request to get the changes merged.
 
