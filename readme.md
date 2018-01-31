@@ -28,3 +28,14 @@ Install the needed dependencies by running
  4. provide a description under `description_data` that conforms with the [CNA rules](https://cve.mitre.org/cve/cna/CNA_Rules_v2.0.pdf) (see appendix B).
 4. run `python validator.py`
 5. raise a pull request to get the changes merged.
+
+
+### Syncing with the public cvelist
+
+**First** you need to clone the [public cvelist repository](https://github.com/CVEProject/cvelist) onto your machine.
+
+Then you can use the `scripts/sync_with_public_cvelist.py` script to synchronize between the internal cvelist and the public one.
+Information on using the sync script can be obtained by running
+
+    python -m scripts.sync_with_public_cvelist -h
+
