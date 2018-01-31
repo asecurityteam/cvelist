@@ -28,11 +28,12 @@ def main():
             schema = 'CVE_JSON_4.0_min_public.schema'
             full_path = os.path.join(root, file_)
             file_json = None
-            if (not file_.endswith('.json') or
-                    'templates' in full_path or 'CVE-' not in file_):
+            if not file_.endswith('.json'):
                 continue
             with open(full_path, 'r') as f:
                 file_json = json.load(f)
+            if 'CVE-' not in file_ or 'templates' in full_path:
+                continue
             if '/reserved/' in full_path:
                 schema = 'CVE_JSON_4.0_min_reserved.schema'
             validator = jsonschema.Draft4Validator(schema_data[schema])
