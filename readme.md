@@ -35,7 +35,7 @@ Install the needed dependencies by running
 
 **First** you need to clone the [public cvelist repository](https://github.com/CVEProject/cvelist) onto your machine.
 
-Then you can use the `scripts/sync_with_public_cvelist.py` script to synchronize between the internal cvelist and the public one.
+Then you can use the `scripts/sync_with_public_cvelist.py` script to synchronise between the internal cvelist and the public one.
 Information on using the sync script can be obtained by running
 
     python -m scripts.sync_with_public_cvelist -h

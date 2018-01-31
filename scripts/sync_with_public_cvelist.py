@@ -8,7 +8,7 @@ from . import utils
 
 def setup_opts():
     parser = argparse.ArgumentParser(
-        description='A script that can be used to synchronize an internal '
+        description='A script that can be used to synchronise an internal '
         'cvelist and the public cvelist.')
     parser.add_argument('-p', '--path-to-cvelist-repository',
                         dest='public_cvelist_path', required=True,
