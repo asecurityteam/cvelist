@@ -38,7 +38,6 @@ def sync_cve_files(files, copying_to, direction):
                 print('Not copying %s as it already exists at %s' % (
                     a_file, possible_existing_location))
                 continue
-            dest = os.path.join(dest, 'reserved')
         if direction == 'to_public':
             if state in {'IN_PROGRESS', 'RESERVED'}:
                 print('Not copying %s as it is %s' % (a_file, state))
