@@ -51,9 +51,6 @@ def reserve_cve_id(cve_id, filepath):
     """ setups up the cve id for reservation. """
     a_dir = os.path.dirname(filepath)
     dest_dir = a_dir
-    split_dir = os.path.split(a_dir)
-    if split_dir[-1] == 'reserved':
-        dest_dir = os.path.join(*split_dir[:-1])
     dest_file_path = os.path.join(dest_dir, os.path.basename(filepath))
     output_json = load_template()
     output_json['CVE_data_meta']['ID'] = cve_id

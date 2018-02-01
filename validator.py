@@ -1,10 +1,11 @@
 #!/usr/bin/python
-import json
 import os
 import sys
 
 import jsonschema
 import requests
+
+from scripts import utils
 
 
 def retrieve_schema(schemas):
@@ -27,14 +28,12 @@ def main():
         for file_ in sorted(files, reverse=True):
             schema = 'CVE_JSON_4.0_min_public.schema'
             full_path = os.path.join(root, file_)
-            file_json = None
             if not file_.endswith('.json'):
                 continue
-            with open(full_path, 'r') as f:
-                file_json = json.load(f)
+            file_json = utils.get_info_from_cve_json_file(full_path)
             if 'CVE-' not in file_ or 'templates' in full_path:
                 continue
-            if '/reserved/' in full_path:
+            if utils.get_state_from_cve_json(file_json) == 'RESERVED':
                 schema = 'CVE_JSON_4.0_min_reserved.schema'
             validator = jsonschema.Draft4Validator(schema_data[schema])
             if not validator.is_valid(file_json):
