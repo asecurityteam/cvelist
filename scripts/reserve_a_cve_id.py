@@ -49,14 +49,10 @@ def load_template(name='base.json'):
 
 def reserve_cve_id(cve_id, filepath):
     """ setups up the cve id for reservation. """
-    a_dir = os.path.dirname(filepath)
-    dest_dir = a_dir
-    dest_file_path = os.path.join(dest_dir, os.path.basename(filepath))
     output_json = load_template()
     output_json['CVE_data_meta']['ID'] = cve_id
-    with open(dest_file_path, 'w') as f:
+    with open(filepath, 'w') as f:
         json.dump(output_json, f, indent=4)
-    os.unlink(filepath)
 
 
 def reserve_cve_id_in_git(cve_id):
