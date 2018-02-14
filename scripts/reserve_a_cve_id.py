@@ -52,7 +52,7 @@ def reserve_cve_id(cve_id, filepath):
     output_json = load_template()
     output_json['CVE_data_meta']['ID'] = cve_id
     with open(filepath, 'w') as f:
-        json.dump(output_json, f, indent=4)
+        json.dump(output_json, f, indent=3)
 
 
 def reserve_cve_id_in_git(cve_id):
