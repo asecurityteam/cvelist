@@ -1,60 +1,60 @@
 {
-   "CVE_data_meta" : {
-      "ASSIGNER" : "security@atlassian.com",
-      "DATE_PUBLIC" : "20XX-XX-XXT00:00:00",
-      "ID" : "CVE-20XX-XXXX",
-      "STATE" : "IN_PROGRESS"
+   "CVE_data_meta": {
+      "ASSIGNER": "security@atlassian.com",
+      "DATE_PUBLIC": "20XX-XX-XXT00:00:00",
+      "ID": "CVE-20XX-XXXX",
+      "STATE": "IN_PROGRESS"
    },
-   "affects" : {
-      "vendor" : {
-         "vendor_data" : [
+   "affects": {
+      "vendor": {
+         "vendor_data": [
             {
-               "product" : {
-                  "product_data" : [
+               "product": {
+                  "product_data": [
                      {
-                        "product_name" : "Example",
-                        "version" : {
-                           "version_data" : [
+                        "product_name": "Example",
+                        "version": {
+                           "version_data": [
                               {
-                                 "version_value" : "Versions less than X.X.X"
+                                 "version_value": "Versions less than X.X.X"
                               }
                            ]
                         }
                      }
                   ]
                },
-               "vendor_name" : "Atlassian"
+               "vendor_name": "Atlassian"
             }
          ]
       }
    },
-   "data_format" : "MITRE",
-   "data_type" : "CVE",
-   "data_version" : "4.0",
-   "description" : {
-      "description_data" : [
+   "data_format": "MITRE",
+   "data_type": "CVE",
+   "data_version": "4.0",
+   "description": {
+      "description_data": [
          {
-            "lang" : "eng",
-            "value" : "{Component} in {company} {product} from version {high_affected_version} before version {lowest_fix_version} allows remote attackers to {impact} via a {vuln_info}."
+            "lang": "eng",
+            "value": "{Component} in {company} {product} from version {high_affected_version} before version {lowest_fix_version} allows remote attackers to {impact} via a {vuln_info}."
          }
       ]
    },
-   "problemtype" : {
-      "problemtype_data" : [
+   "problemtype": {
+      "problemtype_data": [
          {
-            "description" : [
+            "description": [
                {
-                  "lang" : "eng",
-                  "value" : "n/a"
+                  "lang": "eng",
+                  "value": "n/a"
                }
             ]
          }
       ]
    },
-   "references" : {
-      "reference_data" : [
+   "references": {
+      "reference_data": [
          {
-            "url" : "https://jira.atlassian.com/browse/EXAMPLE-123"
+            "url": "https://jira.atlassian.com/browse/EXAMPLE-123"
          }
       ]
    }
