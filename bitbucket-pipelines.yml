@@ -6,6 +6,8 @@ pipelines:
         caches:
           - pip
         script:
+          - pip install pycodestyle
+          - pycodestyle .
           - pip install -r requirements.txt
           - python validator.py
           - pycodestyle validator.py scripts/
