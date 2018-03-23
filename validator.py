@@ -33,8 +33,12 @@ def main():
             file_json = utils.get_info_from_cve_json_file(full_path)
             if 'CVE-' not in file_ or 'templates' in full_path:
                 continue
-            if utils.get_state_from_cve_json(file_json) == 'RESERVED':
+            state = utils.get_state_from_cve_json(file_json)
+            if state == 'RESERVED':
                 schema = 'CVE_JSON_4.0_min_reserved.schema'
+            if state not in {'RESERVED', 'PUBLIC', 'IN_PROGRESS'}:
+                print(full_path, state, 'is not a valid STATE value.')
+                errors += 1
             validator = jsonschema.Draft4Validator(schema_data[schema])
             if not validator.is_valid(file_json):
                 errors += 1
