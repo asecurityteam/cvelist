@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import collections
 import json
 import os
 import re
@@ -44,7 +45,7 @@ def load_template(name='base.json'):
         utils.get_internal_cvelist_location(),
         'templates')
     with open(os.path.join(template_dir, name), 'r') as f:
-        return json.load(f)
+        return json.load(f, object_pairs_hook=collections.OrderedDict)
 
 
 def reserve_cve_id(cve_id, filepath):
