@@ -1,3 +1,4 @@
+import collections
 import json
 import fnmatch
 import os
@@ -24,7 +25,7 @@ def get_state_from_cve_json(json_data):
 def get_info_from_cve_json_file(file_path):
     """ returns cve information from the given cve json file path. """
     with open(file_path, 'r') as f:
-        return json.load(f)
+        return json.load(f,  object_pairs_hook=collections.OrderedDict)
 
 
 def get_our_cna_cve_ids():
@@ -32,7 +33,7 @@ def get_our_cna_cve_ids():
     range_file_loc = os.path.join(get_internal_cvelist_location(),
                                   'cve_id_ranges.json')
     with open(range_file_loc, 'r') as f:
-        data = json.load(f)
+        data = json.load(f, object_pairs_hook=collections.OrderedDict)
         for rang in data.get('ranges', []):
             start = rang['start']
             end = rang['end']
