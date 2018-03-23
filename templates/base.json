@@ -16,7 +16,12 @@
                         "version": {
                            "version_data": [
                               {
-                                 "version_value": "Versions less than X.X.X"
+                                 "version_value": "{first_affected_version}",
+                                 "version_affected": ">="
+                              },
+                              {
+                                 "version_value": "{lowest_fix_version}",
+                                 "version_affected": "<"
                               }
                            ]
                         }
@@ -35,7 +40,7 @@
       "description_data": [
          {
             "lang": "eng",
-            "value": "{Component} in {company} {product} from version {high_affected_version} before version {lowest_fix_version} allows remote attackers to {impact} via a {vuln_info}."
+            "value": "{Component} in {company} {product} from version {first_affected_version} before version {lowest_fix_version} allows remote attackers to {impact} via a {vuln_info}."
          }
       ]
    },
