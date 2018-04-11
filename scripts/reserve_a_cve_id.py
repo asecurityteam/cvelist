@@ -11,7 +11,7 @@ from . import utils
 
 def get_used_cve_id_from_git_branches():
     """ yields cve ids from git branches of this repository. """
-    cve_pattern = re.compile('(CVE-\d+-\d+)')
+    cve_pattern = re.compile(r'(CVE-\d+-\d+)')
     git_command = [
         'git', 'branch', '-a', '--list', '*CVE*',
         '--format', '%(refname:short)']
