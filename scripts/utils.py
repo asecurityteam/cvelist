@@ -22,6 +22,13 @@ def get_state_from_cve_json(json_data):
     return json_data['CVE_data_meta']['STATE']
 
 
+def get_public_date_from_cve_json(json_data):
+    """ returns the date public value from the given json or None
+        if it has not been provided.
+    """
+    return json_data['CVE_data_meta'].get('DATE_PUBLIC', None)
+
+
 def get_info_from_cve_json_file(file_path):
     """ returns cve information from the given cve json file path. """
     with open(file_path, 'r') as f:

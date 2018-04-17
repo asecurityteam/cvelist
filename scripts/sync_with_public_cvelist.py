@@ -1,7 +1,10 @@
 #!/usr/bin/python
 import argparse
+import datetime
 import os
 import shutil
+
+import dateutil.parser
 
 from . import utils
 
@@ -31,6 +34,7 @@ def sync_cve_files(files, copying_to, direction):
         dest = os.path.join(copying_to, a_dir)
         base_name = os.path.basename(a_file)
         existing_json_data = utils.get_info_from_cve_json_file(a_file)
+        today = datetime.datetime.now()
         state = utils.get_state_from_cve_json(existing_json_data)
         if direction == 'from_public' and state == 'RESERVED':
             possible_existing_location = os.path.join(dest, base_name)
@@ -42,6 +46,15 @@ def sync_cve_files(files, copying_to, direction):
             if state in {'IN_PROGRESS', 'RESERVED'}:
                 print('Not copying %s as it is %s' % (a_file, state))
                 continue
+            public_date = utils.get_public_date_from_cve_json(
+                existing_json_data)
+            if public_date is not None:
+                public_date_obj = dateutil.parser.parse(public_date)
+                if public_date_obj > today:
+                    print(('Not copying %s as it is before the '
+                           'PUBLIC_DATE %s (now - %s)') %
+                          (a_file, public_date, today))
+                    continue
         if state not in {'RESERVED', 'PUBLIC'}:
             raise ValueError('%s is not a valid state - %s' % (state, a_file))
         os.makedirs(dest, exist_ok=True)
