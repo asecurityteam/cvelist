@@ -32,7 +32,7 @@ def get_public_date_from_cve_json(json_data):
 def get_info_from_cve_json_file(file_path):
     """ returns cve information from the given cve json file path. """
     with open(file_path, 'r') as f:
-        return json.load(f,  object_pairs_hook=collections.OrderedDict)
+        return json.load(f, object_pairs_hook=collections.OrderedDict)
 
 
 def get_our_cna_cve_ids():
