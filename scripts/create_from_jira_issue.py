@@ -7,16 +7,6 @@ import requests
 
 def setup_opts():
     parser = argparse.ArgumentParser(description='CVE id json creator')
-#    parser.add_argument('-d', '--description', dest='description',
-#                         required=True, help='Description to use.')
-#    parser.add_argument('-v', '--version', dest='version',
-#                        required=True, help='Version information to use.',
-#                        action='append')
-#    parser.add_argument('-p', '--product-name', dest='product_name',
-#                        required=True, help='The product name.')
-#    parser.add_argument('-r', '--references', dest='references',
-#                        required=True, action='append',
-#                        help='Reference urls - e.g. jira.com/foobar-123')
     parser.add_argument('-u', '--url', dest='jira_server_url',
                         required=True, help='Url to the jira server')
     parser.add_argument('-i', '--issue-key', dest='issue_key',
