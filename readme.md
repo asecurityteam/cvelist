@@ -38,10 +38,10 @@ However, if you are part of Security Engineering then:
 
 1. go to [https://cveform.mitre.org/](https://cveform.mitre.org/)
 2. Select "Request a block of IDs (For CNAs Only)"
-3. Enter security@atlassian.com for the email address.
+3. enter security@atlassian.com for the email address.
 4. request 10 more CVE ids.
-5. Wait for Mitre to respond via email to provide the CVE ids, you will need to monitor incoming issues on the [securitysd.atlassian.net instance](https://securitysd.atlassian.net/issues/?jql=text%20~%20"mitre"%20and%20resolution%20is%20empty).
-6. Follow the instructions above on how to add new CVE ids to this repository.
+5. wait for Mitre to respond via email to provide the CVE ids, you will need to monitor incoming issues on the [securitysd.atlassian.net instance](https://securitysd.atlassian.net/issues/?jql=text%20~%20"mitre"%20and%20resolution%20is%20empty).
+6. follow the instructions above on how to add new CVE ids to this repository.
 
 ### Syncing with the public cvelist
 
