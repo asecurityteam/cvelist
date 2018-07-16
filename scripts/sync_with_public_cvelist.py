@@ -29,7 +29,7 @@ def setup_opts():
 
 
 def sync_cve_files(files, copying_to, direction):
-    for a_file in files:
+    for a_file in sorted(files):
         a_dir = os.path.dirname(a_file).split('cvelist')[-1].lstrip(os.sep)
         dest = os.path.join(copying_to, a_dir)
         base_name = os.path.basename(a_file)
