@@ -32,9 +32,9 @@ Install the needed dependencies by running
 
 ### What if there are no CVE ids left?
 
-If you are not a part of Security Engineering, then ask the `@engdisturbed` in the stride security room to ask Mitre for more CVE ids.
+If you are not a part of Product Security team, then ask the `!engdisturbed` in the Slack \#help-security room to ask Mitre for more CVE ids.
 
-However, if you are part of Security Engineering then:
+However, if you are part of Product Security then:
 
 1. go to [https://cveform.mitre.org/](https://cveform.mitre.org/)
 2. Select "Request a block of IDs (For CNAs Only)"
