@@ -5,7 +5,11 @@ This is the internal cvelist repository for managing [CVE](https://cve.mitre.org
 
 ### Setup
 
-First create a python 3 virtualenv and then run
+Create a python 3 virtualenv:
+
+    pipenv shell --three
+
+Install the requirements:
 
     pip install -r requirements.txt
 
