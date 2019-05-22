@@ -74,8 +74,8 @@ def main():
     if args.direction == 'from_public':
         copying_to = internal_cvelist
         copying_from = args.public_cvelist_path
-    files = set(utils.get_file_listing_for_path(copying_from,
-                                                files_to_match))
+    files = set(utils.get_file_listing_for_path(
+        copying_from, files_to_match, exact_file_matches=set(files_to_match)))
     sync_cve_files(files, copying_to, args.direction)
 
 
