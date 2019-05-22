@@ -4,17 +4,25 @@ import fnmatch
 import os
 
 
-def get_file_listing_for_path(path, fnmatches):
+def get_file_listing_for_path(path, fnmatches, exact=False):
     """ returns a generator expression for getting the file listing
         of files matching any of the given fnmatches under the supplied
-        path.
+        path, if exact is True then only exact filename matches will be
+        accepted.
     """
     for root, dirs, files in os.walk(path):
         for file_ in sorted(files):
-            for fnm in fnmatches:
-                if fnmatch.fnmatch(file_, fnm):
-                    yield os.path.join(root, file_)
-                    break
+            matched = False
+            if exact:
+                if file_ in fnmatches:
+                    matched = True
+            else:
+                for fnm in fnmatches:
+                    if fnmatch.fnmatch(file_, fnm):
+                        matched = True
+                        break
+            if matched:
+                yield os.path.join(root, file_)
 
 
 def get_state_from_cve_json(json_data):
