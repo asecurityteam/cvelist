@@ -7,12 +7,12 @@ This is the internal cvelist repository for managing [CVE](https://cve.mitre.org
 
 Create a python 3 virtualenv.
 
-For example, using virtualenv via virtualenvwrapper:
+For example,
 
+    # using virtualenv via virtualenvwrapper:
     mkvirtualenv -p /usr/bin/python3 cvelist
 
-For example, using Pipenv:
-
+    # or by using Pipenv
     pipenv shell --three
 
 Install the requirements:
