@@ -62,10 +62,16 @@ def reserve_cve_id_in_git(cve_id):
     subprocess.check_call(['git', 'push', '-q', 'origin', cve_id])
 
 
+def update_git_repo_info():
+    """ updates git remote information. """
+    subprocess.check_call(['git', 'remote', 'update'])
+
+
 def main():
     if len(sys.argv) <= 1:
         sys.exit('Please specify a year.')
     year = int(sys.argv[1])
+    update_git_repo_info()
     used_cve_ids = set(get_used_cve_id_from_git_branches())
     year_allocation = os.path.join(
         utils.get_internal_cvelist_location(), str(year))
