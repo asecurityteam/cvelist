@@ -39,6 +39,12 @@ def main():
             if state not in {'RESERVED', 'PUBLIC', 'IN_PROGRESS'}:
                 print(full_path, state, 'is not a valid STATE value.')
                 errors += 1
+            cve_id = utils.get_cve_id_from_cve_json(file_json)
+            cve_id_from_fn = os.path.basename(full_path).split('.json')[0]
+            if cve_id != cve_id_from_fn:
+                print(full_path, cve_id,
+                      'does not match the file name cve id', cve_id_from_fn)
+                errors += 1
             validator = jsonschema.Draft4Validator(schema_data[schema])
             if not validator.is_valid(file_json):
                 errors += 1
