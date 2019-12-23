@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import os
+import json
 import sys
 
 import jsonschema
@@ -19,7 +20,30 @@ def retrieve_schema(schemas):
     return schema_data
 
 
+def create_missing_cve_id_files():
+    internal_cvelist = utils.get_internal_cvelist_location()
+    template = None
+    with open(os.path.join(internal_cvelist, 'templates', 'reserved.json'),
+              'r') as f:
+        template = json.load(f)
+    for cve_id in utils.get_our_cna_cve_ids():
+        cve_id_f_name = '%s.json' % cve_id
+        _, cve_id_year, cve_id_num = cve_id.split('-')
+        cve_id_num = int(cve_id_num)
+        cve_id_num_dir_name = '%sxxx' % int((cve_id_num // 1000))
+        expected_path = os.path.join(
+            internal_cvelist, cve_id_year, cve_id_num_dir_name)
+        expected_path_f = os.path.join(expected_path, cve_id_f_name)
+        if not os.path.exists(expected_path_f):
+            os.makedirs(expected_path, exist_ok=True)
+            template_to_modify = template.copy()
+            template_to_modify['CVE_data_meta']['ID'] = cve_id
+            with open(expected_path_f, 'w+') as f:
+                json.dump(template_to_modify, f, indent=4)
+
+
 def main():
+    create_missing_cve_id_files()
     errors = 0
     schemas = ['CVE_JSON_4.0_min_public.schema',
                'CVE_JSON_4.0_min_reserved.schema']
